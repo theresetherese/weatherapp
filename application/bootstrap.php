@@ -80,7 +80,8 @@ if (isset($_SERVER['KOHANA_ENV']))
  * - boolean  caching     enable or disable internal caching                 FALSE
  */
 Kohana::init(array(
-	'base_url'   => '/',
+	'base_url'   => '/weather',
+	'index_file' => '',
 ));
 
 /**
@@ -113,6 +114,6 @@ Kohana::modules(array(
  */
 Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults(array(
-		'controller' => 'welcome',
+		'controller' => 'index',
 		'action'     => 'index',
 	));
