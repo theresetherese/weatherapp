@@ -2,7 +2,7 @@
 
 class Model_Forecastmodel extends Model
 {
-    public function get_xml()
+    public function get_xml($country, $region, $city)
     {
      	$url = 'http://localhost:8888/weather/forecast.xml';   	
 

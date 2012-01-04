@@ -1,34 +1,49 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Index extends Controller {
-
+class Controller_Index extends Controller_Template {
+	public $template = 'template';
+	
+	public function before()
+	{
+		parent::before();
+		
+		if ($this->auto_render)
+		{
+			// Initialize empty values
+			$this->template->title   = '';
+			$this->template->content = '';
+			
+			$this->template->styles = array();
+			$this->template->scripts = array();
+		
+		}
+	}
+	
 	public function action_index()
 	{
-		//Get location
-		
-		//Create forecastehandler
-		$fHandler = Model::factory('forecasthandler');
-		
-		//Get xmldata with forecast
-		$xml = $fHandler->get_xml();
-		
-		//Check if data was retrieved
-		if($xml !== false)
-		{
-			//Send xml to handler and create objects
-			$fHandler->get_default_forecast_objects($xml);
-			
-				
-			//echo $forecastXML;
-		}
-		//Send error message that data could not be retrieved 
-		else 
-		{
-			$this->response->body('Kunde inte hämta data.');
-			
-		}
-		
-		
+		//Add view to template
+		$this->template->content = "INDEX";
 	}
 
-} // End Welcome
+	public function after()
+	{
+		if ($this->auto_render)
+		{
+			$styles = array(
+				'media/css/screen.css' => 'screen, projection',
+				'media/css/print.css' => 'print',
+				'media/css/style.css' => 'screen',
+			);
+		
+			$scripts = array(
+				'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js',
+				'media/js/forecast.js'
+			);
+		
+			$this->template->styles = array_merge( $this->template->styles, $styles );
+			$this->template->scripts = array_merge( $this->template->scripts, $scripts );
+		}
+		parent::after();
+	}
+
+}// End Welcome
