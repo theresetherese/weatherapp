@@ -8,22 +8,21 @@ class Model_Forecastmodel extends Model
 		 * TODO Validate country, region and city before adding them to url
 		 */
 		
-     	$url = 'http://localhost:8888/weather/forecast.xml';   	
+     	$url = "http://www.yr.no/place/Sverige/kalmar/kalmar/forecast.xml";   	
 
 		try
 		{
 			//Create request instance	
-			$request = Request::factory($url)
-		    	->method('GET');
+			$request = Request::factory($url);
 			
 			//Execute request
 			$response = $request->execute();
-			
+
 			//Response is ok if status === 200 or 304
 			if($response->status() === 200 OR $response->status() === 304)
 			{
 				//Check the content-type, only xml is ok
-				if($response->headers('Content-Type') === 'application/xml')
+				if($response->headers('Content-Type') === 'text/xml; charset=utf-8')
 				{
 					return $response;
 				}

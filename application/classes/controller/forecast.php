@@ -22,8 +22,8 @@ class Controller_Forecast extends Controller {
 		//Control that city, region and country is returned correctly.
 		if(!is_null($city) AND !is_null($region) AND !is_null($country))
 		{
-			//Get xmldata with forecast for the city
-			$xml = $fHandler->get_xml($country, $region, $city);
+			//Check if data is cached, else request new data and cache it
+			$xml = $this->get_xml($country, $region, $city);
 			
 			//Check if data was retrieved
 			if($xml !== false)
@@ -84,6 +84,42 @@ class Controller_Forecast extends Controller {
 		{
 			$this->response->status(400);
 			$this->response->body('Can not find valid country, region and city in the url. Valid example: http://thisapp.com/sweden/kalmar/hultsfred/' );
+		}
+	}
+
+
+	public function get_xml($country, $region, $city)
+	{
+		// Check for the existance of the cache driver
+		if(isset(Cache::$instances['sqlite']))
+		{
+		     // Get the existing cache instance
+		     $memcache = Cache::$instances['sqlite'];
+		}
+		else
+		{
+		     // Get the cache driver instance
+		     $memcache = Cache::instance('sqlite');
+		}
+		
+		//Check for cached xml
+		if ($xml = Cache::instance('sqlite')->get("$country/$region/$city", FALSE))
+		{
+			echo "hej";			
+		    return $xml;
+		}
+		else
+		{
+		     $fHandler = Model::factory('forecasthandler');
+			 $xml = $fHandler->get_xml($country, $region, $city);
+			 
+			 //Find out how many seconds until midnigt
+			 $tomorrowMidnight = mktime(0, 0, 0, date('n'), date('j') + 1);
+			 $now = time();
+			 $seconds = $tomorrowMidnight - $now;
+			 
+			 Cache::instance('sqlite')->set("$country/$region/$city", $xml, $seconds);
+			 return $xml;
 		}
 	}
 
