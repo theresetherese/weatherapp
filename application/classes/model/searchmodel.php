@@ -1,17 +1,12 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Model_Forecastmodel extends Model
+class Model_Searchmodel extends Model
 {
-    public function get_xml($country, $region, $city)
+    public function get_location($location)
     {
-    	/*
-		 * TODO Validate country, region and city before adding them to url
-		 */
-		
-		$country = urlencode($country);
-		$region = urlencode($region);
-		$city = urlencode($city);
-     	$url = "http://www.yr.no/place/$country/$region/$city/forecast.xml";   	
+     	$lat = $location->getLat();
+		$long = $location->getLong();	
+     	$url = "http://api.geonames.org/findNearbyPlaceName?lat=$lat&lng=$long&username=ts222ay&style=FULL";   	
 
 		try
 		{
@@ -25,7 +20,7 @@ class Model_Forecastmodel extends Model
 			if($response->status() === 200 OR $response->status() === 304)
 			{
 				//Check the content-type, only xml is ok
-				if($response->headers('Content-Type') === 'text/xml; charset=utf-8')
+				if($response->headers('Content-Type') === 'text/xml;charset=UTF-8')
 				{
 					return $response;
 				}

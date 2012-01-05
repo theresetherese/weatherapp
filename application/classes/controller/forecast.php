@@ -104,8 +104,7 @@ class Controller_Forecast extends Controller {
 		
 		//Check for cached xml
 		if ($xml = Cache::instance('sqlite')->get("$country/$region/$city", FALSE))
-		{
-			echo "hej";			
+		{			
 		    return $xml;
 		}
 		else
@@ -123,4 +122,4 @@ class Controller_Forecast extends Controller {
 		}
 	}
 
-}// End Welcome
+}

@@ -21,26 +21,27 @@ class Controller_Index extends Controller_Template {
 	
 	public function action_index()
 	{
-		//Add view to template
-		$this->template->content = "INDEX";
+		
 	}
 
 	public function after()
 	{
 		if ($this->auto_render)
 		{
+			/*	
 			$styles = array(
 				'media/css/screen.css' => 'screen, projection',
 				'media/css/print.css' => 'print',
 				'media/css/style.css' => 'screen',
 			);
-		
+			*/
 			$scripts = array(
 				'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js',
-				'media/js/forecast.js'
+				'media/js/forecast.js',
+				'media/js/search.js'
 			);
 		
-			$this->template->styles = array_merge( $this->template->styles, $styles );
+			//$this->template->styles = array_merge( $this->template->styles, $styles );
 			$this->template->scripts = array_merge( $this->template->scripts, $scripts );
 		}
 		parent::after();

@@ -1,7 +1,7 @@
 //Kör
 $(function(){
+	//loadForecast('sweden/kalmar/kalmar');	
 	
-	loadForecast('sweden/kalmar/kalmar');	
 });
 
 function loadForecast(_url){
@@ -13,7 +13,7 @@ function loadForecast(_url){
 	});
 	$.ajax({
 		success : function(data) {
-			handleData(data);
+			handleForecastData(data);
 		},
 		error : function(object, error) {
 			console.log(object, error);	
@@ -21,14 +21,15 @@ function loadForecast(_url){
 	})	
 }
 
-function handleData(data){
+function handleForecastData(data){
 	$('#forecast').empty();
 	
 	$('#forecast').append(data);
 	
 	if($('.detailsLink').length){
 		
-		$('.detailsLink').click(function() {
+		$('.detailsLink').click(function(e) {
+			e.preventDefault();
 			loadForecast($(this).attr('id'));
 		});
 	
@@ -36,7 +37,8 @@ function handleData(data){
 	
 	if($('.goBackLink').length){
 		
-		$('.goBackLink').click(function() {
+		$('.goBackLink').click(function(e) {
+			e.preventDefault();
 			loadForecast($(this).attr('id'));
 		});
 	

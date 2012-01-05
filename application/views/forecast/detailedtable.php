@@ -22,7 +22,7 @@
 				$newsymbol = '0' . $symbol;
 			}
 			
-			if($symbol < 4 OR $symbol > 4 AND $symbol < 8)
+			if($symbol < 4 OR $symbol > 4 AND $symbol < 9)
 			{
 				if($period === 3)
 				{

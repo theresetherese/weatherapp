@@ -7,6 +7,17 @@
 		<?php foreach ($scripts as $file) echo HTML::script($file), PHP_EOL ?>
 	</head>
 	<body>
+		<h1>Weather</h1>
+		<div id="searchForm">
+			<h2>Search for a city</h2>
+			<?php
+				echo Form::open('');
+				echo Form::input('searchInput', '', array('id' => 'searchInput'));
+				echo Form::submit('searchSubmit', 'Search', array('id' => 'searchSubmitBtn'));
+  				echo Form::close();
+			?>
+		</div>
+		<div id="searchResult"></div>
 		<div id="forecast">
 			<?php echo $content ?>
 		</div>
