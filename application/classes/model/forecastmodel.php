@@ -4,6 +4,10 @@ class Model_Forecastmodel extends Model
 {
     public function get_xml($country, $region, $city)
     {
+    	/*
+		 * TODO Validate country, region and city before adding them to url
+		 */
+		
      	$url = 'http://localhost:8888/weather/forecast.xml';   	
 
 		try
@@ -15,18 +19,32 @@ class Model_Forecastmodel extends Model
 			//Execute request
 			$response = $request->execute();
 			
-			//Return response if status === 200
-			if($response->status() === 200)
+			//Response is ok if status === 200 or 304
+			if($response->status() === 200 OR $response->status() === 304)
 			{
-				return $response;
+				//Check the content-type, only xml is ok
+				if($response->headers('Content-Type') === 'application/xml')
+				{
+					return $response;
+				}
+				//Response was not xml
+				else
+				{
+					return false;	
+				}
 			}
+			//Something with the request went wrong
 			else 
 			{
 				return false;
 			}
 		}
+		//Request could not be created or executed
 		catch(Request_Exception $e)
 		{
+			/*
+			 * TODO Ordentligt felmeddelande
+			 */	
 			return false;
 		}
     }

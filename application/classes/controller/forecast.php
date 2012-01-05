@@ -1,5 +1,10 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
+/*
+ * Calls forecasthandler for xml-data based on request parameters.
+ * Responds with detailed or default view for forecasts.
+ */
+
 class Controller_Forecast extends Controller {
 	
 	public function action_index()
@@ -14,7 +19,8 @@ class Controller_Forecast extends Controller {
 		$date = $this->request->param('date');
 		$period = $this->request->param('period');
 		
-		if(is_string($city) AND is_string($region) AND is_string($country))
+		//Control that city, region and country is returned correctly.
+		if(!is_null($city) AND !is_null($region) AND !is_null($country))
 		{
 			//Get xmldata with forecast for the city
 			$xml = $fHandler->get_xml($country, $region, $city);
@@ -22,8 +28,8 @@ class Controller_Forecast extends Controller {
 			//Check if data was retrieved
 			if($xml !== false)
 			{
-				
-				if(is_string($date) AND is_string($period))
+				//If date and period is set, then call for a detailed forecast object
+				if(!is_null($date) AND !is_null($period))
 				{
 					//Send xml to handler and create objects
 					$fObjects = $fHandler->get_detailed_forecast_object($xml, $date, $period);
@@ -32,8 +38,16 @@ class Controller_Forecast extends Controller {
 					 */
 					
 					//Create view
-					$view = View::factory('detailedtable');
+					$view = View::factory('forecast/detailedtable');
 				}
+				//If only date or period is set, send error message 
+				else if(!is_null($date) AND is_null($period) OR !is_null($period) AND is_null($date))
+				{
+					$this->response->status(400);
+					$this->response->body('Can not find valid date and period in the url. Valid example: http://thisapp.com/sweden/kalmar/hultsfred/20120105/3');
+					return;
+				}
+				//Call for a fiveday-forecast
 				else
 				{
 					//Send xml to handler and create objects
@@ -43,10 +57,10 @@ class Controller_Forecast extends Controller {
 					 */
 						
 					//Create view
-					$view = View::factory('defaulttable');
+					$view = View::factory('forecast/defaulttable');
 				}
 				
-				//Bind forecastobjects to the view
+				//Bind forecastobjects and location to the view
 				$view->forecasts = $fObjects;
 				$view->country = $country;
 				$view->region = $region;
@@ -60,16 +74,16 @@ class Controller_Forecast extends Controller {
 			//Send error message that data could not be retrieved 
 			else 
 			{
-				$this->response->status(404);
-				$this->response->body('Kunde inte hämta data.' );
+				$this->response->status(500);
+				$this->response->body('Could not retrieve data.' );
 	
 			}
 		}
-
+		//Country, region or city is == null
 		else
 		{
-			$this->response->status(404);
-			$this->response->body('Måste skicka stad som parameter.' );
+			$this->response->status(400);
+			$this->response->body('Can not find valid country, region and city in the url. Valid example: http://thisapp.com/sweden/kalmar/hultsfred/' );
 		}
 	}
 

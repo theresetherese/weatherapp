@@ -1,11 +1,18 @@
 <h1><?php echo Text::ucfirst($city); ?></h1>
 
 <table>
-	
+	<thead>
+		<th>Date</th>
+		<th>Time</th>
+		<th>Weather</th>
+		<th>Temperature</th>
+		<th>Details</th>
+	</thead>
 	<?php 
 		foreach ($forecasts as $f)
 		{
 			$date = date('l', $f->getFromTime());
+			$fulldate = date('Ymd', $f->getFromTime());
 			$fromTime = date('H:i', $f->getFromTime());
 			$toTime = date('H:i', $f->getToTime());
 			$period = $f->getPeriod();
@@ -39,6 +46,7 @@
 					<td>$fromTime - $toTime</td>
 					<td><img src='" . URL::base('http') . "media/icons/$symbol.png' alt='$symbolName' /></td>
 					<td>$temperature &deg; C</td>
+					<td><a href='#' id='$country/$region/$city/$fulldate/$period' class='detailsLink'>Details</a></td>
 				</tr>
 			";
 		}

@@ -39,21 +39,27 @@
 			
 			echo "
 				<tr>
+					<td>Date</td>
 					<td>$date $fromTime - $toTime</td>
 				</tr>
 				<tr>
+					<td>Weather</td>
 					<td><img src='" . URL::base('http') . "media/icons/$symbol.png' alt='$symbolName' /></td>
 					<td>$temperature &deg; C</td>
 				</tr>
 				<tr>
+					<td>Precipitation</td>
 					<td>$precipitation</td>
 				</tr>
 				<tr>
+					<td>Pressure</td>
 					<td>$pressure</td>
 				</tr>
 				<tr>
+					<td>Wind</td>
 					<td>$windSpeed mps, $windDirectionDeg &deg; $windDirection</td>
 				</tr>
 			";
 	?>
 </table>
+<p><a href="#" id='<?php echo "$country/$region/$city"; ?>' class="goBackLink">Go back</a></p>

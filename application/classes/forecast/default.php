@@ -1,5 +1,10 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
+/*
+ * Default forecast class. Forecast_Detailed extends this class. 
+ * 
+ */
+
 class Forecast_Default
 {
     //Members	

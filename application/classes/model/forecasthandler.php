@@ -2,6 +2,11 @@
 
 class Model_Forecasthandler extends Model
 {
+	/*
+	 * Call forecastmodel to collect xml
+	 * Return xml or false
+	 */
+	
     public function get_xml($country, $region, $city)
     {
      	//Create instance of forecastmodel
@@ -21,6 +26,9 @@ class Model_Forecasthandler extends Model
 		}
     }
 	
+	/*
+	 * Parse xml into forecast objects, a five day prognosis
+	 */ 
 	public function get_default_forecast_objects($xml)
 	{
 		$simplexml = simplexml_load_string($xml);
@@ -67,6 +75,9 @@ class Model_Forecasthandler extends Model
 		return $fObjects;
 	}
 
+	/*
+	 * Parse xml into a detailed forecast object
+	 */ 
 	public function get_detailed_forecast_object($xml, $date, $period)
 	{
 		$simplexml = simplexml_load_string($xml);
@@ -87,6 +98,7 @@ class Model_Forecasthandler extends Model
 				//Create objects
 				/*
 				 * TODO Validate all values
+				 * 		Constants!
 				 */
 
 				$detailed = new Forecast_Detailed();
