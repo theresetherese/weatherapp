@@ -13,11 +13,36 @@ class Controller_Search extends Controller {
 		{
 			$this->search_geo();
 		}
+		else if($this->request->param('city'))
+		{
+			$this->search_query();
+		}
+		else{
+			$this->response->status(400);
+			$this->response->body('En sökning måste innehålla koordinater eller sökterm.');
+		}
 	}	
 	
 	public function search_query()
 	{		
-		$this->response->body('SÖKNING');
+		$templocation = new Location();
+		$templocation->setCity($this->request->param('city'));
+		
+		$searchhandler = Model::factory('searchhandler');
+		$xml = $searchhandler->get_location($templocation);
+		
+		if($locations = $searchhandler->create_location_object_from_query($xml))
+		{
+			$view = View::factory('search/results');
+			$view->locations = $locations;
+			
+			$this->response->status(200);
+			$this->response->body($view);
+		}
+		else{
+			$this->response->status(400);
+			$this->response->body('Stad kunde inte hittas');
+		}
 	}
 	
 	public function search_geo()
@@ -28,8 +53,8 @@ class Controller_Search extends Controller {
 
 		$searchhandler = Model::factory('searchhandler');
 		$xml = $searchhandler->get_location($templocation);
-		
-		$location = $searchhandler->create_location_object($xml);
+
+		$location = $searchhandler->create_location_object_from_coords($xml);
 		$city = $location->getCity();
 		$region = $location->getRegion();
 		$country = $location->getCountry();

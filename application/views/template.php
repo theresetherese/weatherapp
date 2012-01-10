@@ -18,6 +18,7 @@
 			?>
 		</div>
 		<div id="searchResult"></div>
+		<div id="latestSearches"></div>
 		<div id="forecast">
 			<?php echo $content ?>
 		</div>

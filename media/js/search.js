@@ -20,9 +20,12 @@ $(function(){
 	  	);
 	}
 	
+	getSearches();
+	
 	$('form').submit(function(e) {
 		e.preventDefault();
 		loadSearchResults($('#searchInput').val());
+		saveSearch($('#searchInput').val());
 	});
 });
 
@@ -53,7 +56,7 @@ function loadSearchResults(_s){
 	});
 	$.ajax({
 		success : function(data) {
-			handleData(data);
+			handleSearchData(data);
 		},
 		error : function(object, error) {
 			console.log(object, error);	
@@ -65,4 +68,57 @@ function handleSearchData(data){
 	$('#searchResult').empty();
 	
 	$('#searchResult').append(data);
+	
+	$('.chooseLocationLink').click(function(e) {
+		e.preventDefault();
+		loadForecast($(this).attr('id'));
+	});
+	
+	getSearches();
+}
+
+function saveSearch(searchInput){
+	//localStorage.setItem(searchInput, searchInput);
+	if(localStorage.getItem('weatherSearches'))
+	{
+		var searches = localStorage.getItem('weatherSearches').split(',');
+		var index = jQuery.inArray(searchInput, searches);
+		
+		if(index >= 0)
+		{
+			
+		}
+		else{
+			searches.splice(0, 0, searchInput);
+			if(searches.length >= 10)
+			{
+				searches = searches.slice(0,10);
+			}
+			localStorage.setItem('weatherSearches', searches);
+		}
+	}
+	else{
+		localStorage.setItem('weatherSearches', searchInput);
+	}
+}
+
+function getSearches(){
+	$('#latestSearches').empty();
+	$('#latestSearches').append('<h3>Latest searches</h3>');
+	var searches = localStorage.getItem('weatherSearches').split(',');
+	
+	if(searches.length > 0){
+		$('#latestSearches').append('<ul id="latestSearchesList">');
+		for (var i in searches)
+		{
+			$('#latestSearchesList').append('<li><a href="#" class="latestSearchLink">' + searches[i] + '</a></li>');
+		}
+		$('#latestSearches').append('</ul>');
+	}
+	
+	$('.latestSearchLink').click(function(e){
+		e.preventDefault();
+		$('#searchInput').val($(this).text());
+		loadSearchResults($(this).text());
+	});
 }

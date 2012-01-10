@@ -1,4 +1,4 @@
-<h1><?php echo Text::ucfirst($city); ?></h1>
+<h1><?php echo Text::ucfirst($city) . ', ' . Text::ucfirst($region) . ', ' . Text::ucfirst($country); ?></h1>
 
 <table>
 	<thead>

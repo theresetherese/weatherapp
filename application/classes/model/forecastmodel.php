@@ -8,11 +8,11 @@ class Model_Forecastmodel extends Model
 		 * TODO Validate country, region and city before adding them to url
 		 */
 		
-		$country = urlencode($country);
-		$region = urlencode($region);
-		$city = urlencode($city);
+		$country = rawurlencode($country);
+		$region = rawurlencode($region);
+		$city = rawurlencode($city);
      	$url = "http://www.yr.no/place/$country/$region/$city/forecast.xml";   	
-
+		
 		try
 		{
 			//Create request instance	

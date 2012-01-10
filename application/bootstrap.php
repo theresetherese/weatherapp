@@ -113,11 +113,18 @@ Kohana::modules(array(
  * defaults for the URI.
  */
 
-Route::set('forecast', 'forecast/(<country>)(/<region>)(/<city>)(/<date>)(/<period>)')
+Route::set('forecast', 'forecast(/<country>)(/<region>)(/<city>)(/<date>)(/<period>)')
 	->defaults(array(
 		'controller' => 'forecast',
 		'action'     => 'index',
 	));
+
+Route::set('search', 'search(/<city>)')
+	->defaults(array(
+		'controller' => 'search',
+		'action'     => 'index',
+	));
+
 
 Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults(array(

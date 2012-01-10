@@ -2,12 +2,22 @@
 
 class Model_Searchmodel extends Model
 {
-    public function get_location($location)
+    public function get_location(Location $location)
     {
-     	$lat = $location->getLat();
-		$long = $location->getLong();	
-     	$url = "http://api.geonames.org/findNearbyPlaceName?lat=$lat&lng=$long&username=ts222ay&style=FULL";   	
-
+     	if($location->getLat() AND $location->getLong())
+     	{
+     		$lat = $location->getLat();
+			$long = $location->getLong();	
+     		$url = "http://api.geonames.org/findNearbyPlaceName?lat=$lat&lng=$long&username=ts222ay&style=FULL";   	
+		}
+		else if($location->getCity())
+		{
+			$city = $location->getCity();	
+			$url = "http://api.geonames.org/search?name=$city&maxRows=10&style=full&username=ts222ay&featureClass=P";
+		}
+		else{
+			return false;
+		}
 		try
 		{
 			//Create request instance	
