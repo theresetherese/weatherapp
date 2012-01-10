@@ -2,7 +2,7 @@
 
 class Model_Searchmodel extends Model
 {
-    public function get_location(Location $location)
+    public function get_location(Location $location, $page)
     {
      	if($location->getLat() AND $location->getLong())
      	{
@@ -12,8 +12,19 @@ class Model_Searchmodel extends Model
 		}
 		else if($location->getCity())
 		{
-			$city = $location->getCity();	
-			$url = "http://api.geonames.org/search?name=$city&maxRows=10&style=full&username=ts222ay&featureClass=P";
+			$maxRows = 10;
+			$city = $location->getCity();
+					
+			if($page != 0)
+			{
+				$startFrom = $maxRows * $page;
+				$url = "http://api.geonames.org/search?name=$city&maxRows=$maxRows&style=full&username=ts222ay&featureClass=P&startRow=$startFrom";
+			}	
+			else{
+				$url = "http://api.geonames.org/search?name=$city&maxRows=$maxRows&style=full&username=ts222ay&featureClass=P";
+			}
+			
+			
 		}
 		else{
 			return false;

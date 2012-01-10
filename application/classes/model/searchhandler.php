@@ -7,13 +7,13 @@ class Model_Searchhandler extends Model
 	 * Return xml or false
 	 */
 	
-    public function get_location($location)
+    public function get_location($location, $page = NULL)
     {
      	//Create instance of forecastmodel
      	$searchmodel = Model::factory('searchmodel');
 		
 		//Get xml from model
-		$searchXML = $searchmodel->get_location($location);
+		$searchXML = $searchmodel->get_location($location, $page);
 		
 		//Return false or xml
 		if($searchXML === false)
@@ -30,14 +30,17 @@ class Model_Searchhandler extends Model
 	{
 		$simplexml = simplexml_load_string($xml);
 		
-		$object = $simplexml->xpath('//geoname');
-		$location = new Location();
-		$location->setCity((string)$object[0]->name);
-		$location->setRegion((string)$object[0]->adminName1);
-		$location->setCountry((string)$object[0]->countryName);
-		$location->setLat((float)$object[0]->lat);
-		$location->setLong((float)$object[0]->lng);
-		return $location;
+		if($object = $simplexml->xpath('//geoname'))
+		{
+			$location = new Location();
+			$location->setCity((string)$object[0]->name);
+			$location->setRegion((string)$object[0]->adminName1);
+			$location->setCountry((string)$object[0]->countryName);
+			$location->setLat((float)$object[0]->lat);
+			$location->setLong((float)$object[0]->lng);
+			return $location;
+		}
+		return false;
 	}
 	
 	public function create_location_object_from_query($xml)

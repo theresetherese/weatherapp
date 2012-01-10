@@ -1,6 +1,13 @@
 $(function(){
-	// Check for Geolocation support
-	if (navigator.geolocation) {
+	var position = getSavedPosition();
+	
+	if(position !== false)
+	{
+		loadCoordSearch(position[0], position[1]);
+	}
+	
+	// Check for Geolocation support	
+	else if (navigator.geolocation) {
 		//Get location
 	  	navigator.geolocation.getCurrentPosition(function(position) {
 	    	var pos = position;
@@ -8,6 +15,7 @@ $(function(){
 	    	var longitude = pos['coords']['longitude'];
 	    	
 	    	loadCoordSearch(latitude, longitude);
+	    	savePosition(latitude, longitude);
 	    	
 	    	}, function(error) {
 		    alert('Error occurred. Error code: ' + error.code);
@@ -25,7 +33,6 @@ $(function(){
 	$('form').submit(function(e) {
 		e.preventDefault();
 		loadSearchResults($('#searchInput').val());
-		saveSearch($('#searchInput').val());
 	});
 });
 
@@ -57,6 +64,8 @@ function loadSearchResults(_s){
 	$.ajax({
 		success : function(data) {
 			handleSearchData(data);
+			saveSearch(_s);
+			getSearches();
 		},
 		error : function(object, error) {
 			console.log(object, error);	
@@ -75,27 +84,31 @@ function handleSearchData(data){
 	});
 	
 	getSearches();
+	
+	$('.paginationLink').click(function(e) {
+		e.preventDefault();
+		loadSearchResults($(this).attr('id'));
+	});
 }
 
 function saveSearch(searchInput){
-	//localStorage.setItem(searchInput, searchInput);
 	if(localStorage.getItem('weatherSearches'))
 	{
 		var searches = localStorage.getItem('weatherSearches').split(',');
 		var index = jQuery.inArray(searchInput, searches);
-		
+		alert(index);
 		if(index >= 0)
 		{
-			
+			searches.splice(index, 1);
 		}
-		else{
-			searches.splice(0, 0, searchInput);
-			if(searches.length >= 10)
+		
+		searches.splice(0, 0, searchInput);
+
+		if(searches.length >= 10)
 			{
 				searches = searches.slice(0,10);
 			}
 			localStorage.setItem('weatherSearches', searches);
-		}
 	}
 	else{
 		localStorage.setItem('weatherSearches', searchInput);
@@ -121,4 +134,21 @@ function getSearches(){
 		$('#searchInput').val($(this).text());
 		loadSearchResults($(this).text());
 	});
+}
+
+function savePosition(latitude, longitude){
+	var position = [latitude, longitude];
+	
+	localStorage.setItem('weatherAppPosition', position);
+}
+
+function getSavedPosition(){
+	if(localStorage.getItem('weatherAppPosition'))
+	{
+		var position = localStorage.getItem('weatherAppPosition').split(',');
+		return position;
+	}
+	else{
+		return false;
+	}
 }

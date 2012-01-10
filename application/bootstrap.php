@@ -119,7 +119,7 @@ Route::set('forecast', 'forecast(/<country>)(/<region>)(/<city>)(/<date>)(/<peri
 		'action'     => 'index',
 	));
 
-Route::set('search', 'search(/<city>)')
+Route::set('search', 'search(/<city>)(/<page>)')
 	->defaults(array(
 		'controller' => 'search',
 		'action'     => 'index',

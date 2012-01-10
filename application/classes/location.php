@@ -2,11 +2,11 @@
 
 class Location 
 {
-	private $city = "";
-	private $region = "";
-	private $country = "";
-	private $lat = "";
-	private $long = "";
+	private $city = NULL;
+	private $region = NULL;
+	private $country = NULL;
+	private $lat = NULL;
+	private $long = NULL;
 	
 	
 	public function getCity(){
