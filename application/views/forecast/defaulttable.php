@@ -1,5 +1,5 @@
-<h1><?php echo Text::ucfirst($city) . ', ' . Text::ucfirst($region) . ', ' . Text::ucfirst($country); ?></h1>
-
+<h1 id="forecastTitle"><?php echo Text::ucfirst($city) . ', ' . Text::ucfirst($region) . ', ' . Text::ucfirst($country); ?></h1>
+<p class="addFavorite"><a href="#" class="addFavoriteLink" id="<?php echo "$country/$region/$city"; ?>">Add favorite</a></p>
 <table>
 	<thead>
 		<th>Date</th>

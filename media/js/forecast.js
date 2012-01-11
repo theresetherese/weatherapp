@@ -1,9 +1,3 @@
-//Kör
-$(function(){
-	//loadForecast('sweden/kalmar/kalmar');	
-	
-});
-
 function loadForecast(_url){
 	var url2 = 'http://localhost:8888/weather/forecast/' + _url;
 	
@@ -26,11 +20,13 @@ function handleForecastData(data){
 	
 	$('#forecast').append(data);
 	
+	favoriteLinks();
+	
 	if($('.detailsLink').length){
 		
 		$('.detailsLink').click(function(e) {
 			e.preventDefault();
-			loadForecast($(this).attr('id'));
+			loadForecast(this.id);
 		});
 	
 	}
@@ -39,7 +35,7 @@ function handleForecastData(data){
 		
 		$('.goBackLink').click(function(e) {
 			e.preventDefault();
-			loadForecast($(this).attr('id'));
+			loadForecast(this.id);
 		});
 	
 	}

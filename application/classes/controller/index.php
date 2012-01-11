@@ -38,7 +38,8 @@ class Controller_Index extends Controller_Template {
 			$scripts = array(
 				'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js',
 				'media/js/forecast.js',
-				'media/js/search.js'
+				'media/js/search.js',
+				'media/js/favorites.js'
 			);
 		
 			//$this->template->styles = array_merge( $this->template->styles, $styles );

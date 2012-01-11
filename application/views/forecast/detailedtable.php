@@ -1,11 +1,14 @@
-<h1><?php echo Text::ucfirst($city); ?></h1>
+<h1 id="forecastTitle"><?php echo Text::ucfirst($city) . ', ' . Text::ucfirst($region) . ', ' . Text::ucfirst($country); ?></h1>
+<?php 
+	$date = date('l', $forecasts->getFromTime());
+	$fromTime = date('H:i', $forecasts->getFromTime());
+	$toTime = date('H:i', $forecasts->getToTime());
+?>
 
+<h2><?php echo "$date, $fromTime - $toTime"; ?></h2>
 <table>
 	
 	<?php 
-			$date = date('l', $forecasts->getFromTime());
-			$fromTime = date('H:i', $forecasts->getFromTime());
-			$toTime = date('H:i', $forecasts->getToTime());
 			$period = $forecasts->getPeriod();
 			$symbol = $forecasts->getSymbol();
 			$newsymbol = $symbol;
@@ -38,10 +41,6 @@
 			
 			
 			echo "
-				<tr>
-					<td>Date</td>
-					<td>$date $fromTime - $toTime</td>
-				</tr>
 				<tr>
 					<td>Weather</td>
 					<td><img src='" . URL::base('http') . "media/icons/$symbol.png' alt='$symbolName' /></td>

@@ -33,6 +33,7 @@ $(function(){
 	$('form').submit(function(e) {
 		e.preventDefault();
 		loadSearchResults($('#searchInput').val());
+		saveSearch($('#searchInput').val());
 	});
 });
 
@@ -64,7 +65,6 @@ function loadSearchResults(_s){
 	$.ajax({
 		success : function(data) {
 			handleSearchData(data);
-			saveSearch(_s);
 			getSearches();
 		},
 		error : function(object, error) {
@@ -96,7 +96,7 @@ function saveSearch(searchInput){
 	{
 		var searches = localStorage.getItem('weatherSearches').split(',');
 		var index = jQuery.inArray(searchInput, searches);
-		alert(index);
+		
 		if(index >= 0)
 		{
 			searches.splice(index, 1);
@@ -116,24 +116,27 @@ function saveSearch(searchInput){
 }
 
 function getSearches(){
-	$('#latestSearches').empty();
-	$('#latestSearches').append('<h3>Latest searches</h3>');
-	var searches = localStorage.getItem('weatherSearches').split(',');
 	
-	if(searches.length > 0){
-		$('#latestSearches').append('<ul id="latestSearchesList">');
-		for (var i in searches)
-		{
-			$('#latestSearchesList').append('<li><a href="#" class="latestSearchLink">' + searches[i] + '</a></li>');
+	if(localStorage.getItem('weatherSearches')){
+		$('#latestSearches').empty();
+		
+		var searches = localStorage.getItem('weatherSearches').split(',');
+		
+		if(searches.length > 0){
+			$('#latestSearches').append('<select id="latestSearchesList">');
+			$('#latestSearchesList').append('<option value="latest" disabled="disabled" selected="selected">Latest searches</option>');
+			for (var i in searches)
+			{
+				$('#latestSearchesList').append('<option value="' + searches[i] + '">' + searches[i] + '</option>');
+			}
+			$('#latestSearches').append('</select>');
 		}
-		$('#latestSearches').append('</ul>');
+		
+		$('#latestSearchesList').change(function(e){
+			$('#searchInput').val($('#latestSearchesList option:selected').text());
+			loadSearchResults($('#latestSearchesList option:selected').text());
+		});
 	}
-	
-	$('.latestSearchLink').click(function(e){
-		e.preventDefault();
-		$('#searchInput').val($(this).text());
-		loadSearchResults($(this).text());
-	});
 }
 
 function savePosition(latitude, longitude){
