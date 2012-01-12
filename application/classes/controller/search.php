@@ -19,7 +19,7 @@ class Controller_Search extends Controller {
 		}
 		else{
 			$this->response->status(400);
-			$this->response->body('En sökning måste innehålla koordinater eller sökterm.');
+			$this->response->body('A search must contain coords or a query.');
 		}
 	}	
 	
@@ -28,23 +28,31 @@ class Controller_Search extends Controller {
 		$templocation = new Location();
 		$templocation->setCity($this->request->param('city'));
 		$page = $this->request->param('page');
+		$json = $this->request->param('json');
 		
 		$xml = $this->cache($templocation, $page);
 		
 		$searchhandler = Model::factory('searchhandler');
 		if($locations = $searchhandler->create_location_object_from_query($xml))
 		{
-			$view = View::factory('search/results');
-			$view->locations = $locations;
-			$view->pageNr = $page;
-			$view->query = $templocation->getCity();
-			
-			$this->response->status(200);
-			$this->response->body($view);
+			if(is_null($json))
+			{	
+				$view = View::factory('search/results');
+				$view->locations = $locations;
+				$view->pageNr = $page;
+				$view->query = $templocation->getCity();
+				
+				$this->response->status(200);
+				$this->response->body($view);
+			}
+			else
+			{
+				$this->response->body($this->createQueryJson($locations));
+			}
 		}
 		else{
 			$this->response->status(400);
-			$this->response->body('Stad kunde inte hittas');
+			$this->response->body('The location could not be found.');
 		}
 	}
 	
@@ -53,22 +61,30 @@ class Controller_Search extends Controller {
 		$templocation = new Location();	
 		$templocation->setLat($this->request->query('lat'));
 		$templocation->setLong($this->request->query('long'));
+		$json = $this->request->param('json');
 		
 		$xml = $this->cache($templocation);
 		$searchhandler = Model::factory('searchhandler');
 		
 		if($location = $searchhandler->create_location_object_from_coords($xml))
 		{
-			$city = $location->getCity();
-			$region = $location->getRegion();
-			$country = $location->getCountry();
-			
-			$this->response->status(200);
-			$this->response->body("$country/$region/$city");
+			if(is_null($json))
+			{	
+				$city = $location->getCity();
+				$region = $location->getRegion();
+				$country = $location->getCountry();
+				
+				$this->response->status(200);
+				$this->response->body("$country/$region/$city");
+			}
+			else
+			{
+				$this->response->body($this->createGeoJson($location));
+			}
 		}
 		else{
 			$this->response->status(400);
-			$this->response->body('Stad kunde inte hittas');
+			$this->response->body('The location could not be found.');
 		}
 	}
 	
@@ -123,6 +139,36 @@ class Controller_Search extends Controller {
 			
 			return $xml;
 		}
+	}
+
+	public function createGeoJson(Location $l)
+	{
+		$tempArray = array();	
+		$tempArray['city'] = $l->getCity();
+		$tempArray['region'] = $l->getRegion();
+		$tempArray['country'] = $l->getCountry();
+		$tempArray['latitude'] = $l->getLat();
+		$tempArray['longitude'] = $l->getLong();
+		
+		return json_encode($tempArray);
+	}
+	
+	public function createQueryJson($locations)
+	{
+		$jsonObjects = array();
+		$tempArray = array();
+		
+		foreach ($locations as $l) {
+			$tempArray['city'] = $l->getCity();
+			$tempArray['region'] = $l->getRegion();
+			$tempArray['country'] = $l->getCountry();
+			$tempArray['latitude'] = $l->getLat();
+			$tempArray['longitude'] = $l->getLong();
+			
+			array_push($jsonObjects, $tempArray);
+		}
+		
+		return json_encode($jsonObjects);
 	}
 
 }

@@ -18,15 +18,13 @@ class Controller_Forecast extends Controller {
 		$city = $this->request->param('city');
 		$date = $this->request->param('date');
 		$period = $this->request->param('period');
+		$json = $this->request->param('json');
 		
 		//Control that city, region and country is returned correctly.
 		if(!is_null($city) AND !is_null($region) AND !is_null($country))
 		{
 			//Check if data is cached, else request new data and cache it
-			$xml = $this->get_xml($country, $region, $city);
-			
-			//Check if data was retrieved
-			if($xml !== false)
+			if($xml = $this->get_xml($country, $region, $city))
 			{
 				//If date and period is set, then call for a detailed forecast object
 				if(!is_null($date) AND !is_null($period))
@@ -37,8 +35,16 @@ class Controller_Forecast extends Controller {
 					 * TODO Check if fObject really contains the right objects
 					 */
 					
-					//Create view
-					$view = View::factory('forecast/detailedtable');
+					if(is_null($json) OR empty($json))
+					{
+						//Create view
+						$view = View::factory('forecast/detailedtable');
+					}
+					else 
+					{
+						$this->response->body($this->createDetailedJson($fObjects));
+						return;
+					}
 				}
 				//If only date or period is set, send error message 
 				else if(!is_null($date) AND is_null($period) OR !is_null($period) AND is_null($date))
@@ -56,8 +62,16 @@ class Controller_Forecast extends Controller {
 					 * TODO Check if fObjects really contains the right objects
 					 */
 						
-					//Create view
-					$view = View::factory('forecast/defaulttable');
+					if(is_null($json) OR empty($json))
+					{
+						//Create view
+						$view = View::factory('forecast/defaulttable');
+					}
+					else 
+					{
+						$this->response->body($this->createDefaultJson($fObjects));
+						return;
+					}
 				}
 				
 				//Bind forecastobjects and location to the view
@@ -86,6 +100,47 @@ class Controller_Forecast extends Controller {
 			$this->response->body('Can not find valid country, region and city in the url. Valid example: http://thisapp.com/sweden/kalmar/hultsfred/' );
 		}
 	}
+
+
+
+	public function createDetailedJson(Forecast_Detailed $f){
+		
+		$tempArray = array();
+		
+		$tempArray['fromTime'] = (int)$f->getFromTime();
+		$tempArray['toTime'] = (int)$f->getToTime();
+		$tempArray['period'] = (int)$f->getPeriod();
+		$tempArray['symbol'] = (int)$f->getSymbol();
+		$tempArray['symbolName'] = (string)$f->getSymbolName();
+		$tempArray['temperature'] = (int)$f->getTemperature();
+		$tempArray['precipitation'] = (int)$f->getPrecipitation();
+		$tempArray['windDirectionDegrees'] = (double)$f->getWindDirectionDeg();
+		$tempArray['windDirection'] = (string)$f->getWindDirection();
+		$tempArray['windSpeed'] = (double)$f->getWindSpeed();
+		$tempArray['pressure'] = (double)$f->getPressure();
+		
+		return json_encode($tempArray);
+			
+	}
+	
+	public function createDefaultJson($fObjects){
+		
+		$jsonObjects = array();
+		$tempArray = array();
+		foreach ($fObjects as $f) {	
+			$tempArray['fromTime'] = (int)$f->getFromTime();
+			$tempArray['toTime'] = (int)$f->getToTime();
+			$tempArray['period'] = (int)$f->getPeriod();
+			$tempArray['symbol'] = (int)$f->getSymbol();
+			$tempArray['symbolName'] = (string)$f->getSymbolName();
+			$tempArray['temperature'] = (int)$f->getTemperature();
+			
+			array_push($jsonObjects, $tempArray);
+		}
+		return json_encode($jsonObjects);
+			
+	}
+
 
 
 	public function get_xml($country, $region, $city)

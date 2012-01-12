@@ -28,21 +28,19 @@ class Controller_Index extends Controller_Template {
 	{
 		if ($this->auto_render)
 		{
-			/*	
 			$styles = array(
-				'media/css/screen.css' => 'screen, projection',
-				'media/css/print.css' => 'print',
-				'media/css/style.css' => 'screen',
+				'media/css/style.css' => 'screen'
 			);
-			*/
+			
 			$scripts = array(
 				'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js',
+				'media/js/validator.js',
 				'media/js/forecast.js',
 				'media/js/search.js',
 				'media/js/favorites.js'
 			);
 		
-			//$this->template->styles = array_merge( $this->template->styles, $styles );
+			$this->template->styles = array_merge( $this->template->styles, $styles );
 			$this->template->scripts = array_merge( $this->template->scripts, $scripts );
 		}
 		parent::after();

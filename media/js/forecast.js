@@ -1,21 +1,31 @@
-function loadForecast(_url){
-	var url2 = 'http://localhost:8888/weather/forecast/' + _url;
-	
-	$.ajaxSetup({
-		url : url2,
-		type : "GET",
-	});
-	$.ajax({
-		success : function(data) {
-			handleForecastData(data);
-		},
-		error : function(object, error) {
-			console.log(object, error);	
-		}
-	})	
-}
+/*
+ * Ajax call to get forecastdata
+ * Sends data to handleForecastData()
+ */
+var loadForecast = function(_url){
+	if(validCountryRegionCity(_url)){
+		var url2 = 'http://localhost:8888/weather/forecast/' + _url;
+		
+		$.ajaxSetup({
+			url : url2,
+			type : "GET",
+		});
+		$.ajax({
+			success : function(data) {
+				handleForecastData(data);
+			},
+			error : function(object, error) {
+				console.log(object, error);	
+			}
+		})
+	}
+};
 
-function handleForecastData(data){
+/*
+ * Display forecastdata in container
+ * Add click event to details-link and goback-link
+ */
+var handleForecastData = function(data){
 	$('#forecast').empty();
 	
 	$('#forecast').append(data);
@@ -26,7 +36,7 @@ function handleForecastData(data){
 		
 		$('.detailsLink').click(function(e) {
 			e.preventDefault();
-			loadForecast(this.id);
+			loadForecast($(this).attr('id'));
 		});
 	
 	}
@@ -35,8 +45,8 @@ function handleForecastData(data){
 		
 		$('.goBackLink').click(function(e) {
 			e.preventDefault();
-			loadForecast(this.id);
+			loadForecast($(this).attr('id'));
 		});
 	
 	}
-}
+};
