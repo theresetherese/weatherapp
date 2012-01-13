@@ -41,13 +41,8 @@ $(function(){
 	//Load search results and save search on submit
 	$('form').submit(function(e) {
 		e.preventDefault();
-		if(validText($('#searchInput').val())){
-			loadSearchResults($('#searchInput').val());
-			saveSearch($('#searchInput').val());
-		}
-		else{
-			alert('Only letters, numbers and spaces are allowed.');
-		}
+		loadSearchResults($('#searchInput').val());
+		saveSearch($('#searchInput').val());
 	});
 });
 
@@ -56,7 +51,7 @@ $(function(){
  */
 var loadCoordSearch = function(_lat, _long){
 	if(isNumeric(_lat) && isNumeric(_long)){
-		var url2 = 'http://localhost:8888/weather/search?lat=' + _lat + '&long=' + _long;
+		var url2 = '/weather/search?lat=' + _lat + '&long=' + _long;
 		
 		$.ajaxSetup({
 			url : url2,
@@ -67,7 +62,7 @@ var loadCoordSearch = function(_lat, _long){
 				loadForecast(data);
 			},
 			error : function(object, error) {
-				console.log(object, error);	
+				alert('A problem occurred when trying to determine your position. Please try searching for a location.');
 			}
 		})	
 	}
@@ -80,29 +75,24 @@ var loadCoordSearch = function(_lat, _long){
  * Ajax call to search for a location
  */
 var loadSearchResults = function(_s){
-	if(validText(_s)){
-		var url2 = 'http://localhost:8888/weather/search/' + _s;
-		
-		$.ajaxSetup({
-			url : url2,
-			type : "GET",
-		});
-		$.ajax({
-			success : function(data) {
-				handleSearchData(data);
-				getSearches();
-			},
-			error : function(object, error) {
-				errorMessage('No search results could be found.');	
-			}
-		})
-	}
-	else{
-		alert('Only letters, numbers and spaces are allowed.');
-	}	
+	var url2 = '/weather/search/' + _s;
+	
+	$.ajaxSetup({
+		url : url2,
+		type : "GET",
+	});
+	$.ajax({
+		success : function(data) {
+			handleSearchData(data);
+			getSearches();
+		},
+		error : function(object, error) {
+			errorSearchMessage('No search results.');	
+		}
+	})	
 };
 
-var errorMessage = function(message){
+var errorSearchMessage = function(message){
 	$('#searchResult').empty();
 	$('#searchResult').append(message);
 };

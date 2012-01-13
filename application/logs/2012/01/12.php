@@ -86,3 +86,139 @@
 #1 /Users/Therese/Sites/weather/system/classes/kohana/request.php(1138): Kohana_Request_Client->execute(Object(Request))
 #2 /Users/Therese/Sites/weather/index.php(109): Kohana_Request->execute()
 #3 {main}
+2012-01-12 15:08:32 --- ERROR: ErrorException [ 2 ]: Class HTTP_Header has no unserializer ~ MODPATH/cache/classes/kohana/cache/sqlite.php [ 110 ]
+2012-01-12 15:08:32 --- STRACE: ErrorException [ 2 ]: Class HTTP_Header has no unserializer ~ MODPATH/cache/classes/kohana/cache/sqlite.php [ 110 ]
+--
+#0 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/modules/cache/classes/kohana/cache/sqlite.php(110): Kohana_Core::error_handler('O:8:"Response":...')
+#1 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/application/classes/controller/search.php(115): Kohana_Cache_Sqlite->get('uppsala_0', false)
+#2 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/application/classes/controller/search.php(33): Controller_Search->cache(Object(Location), NULL)
+#3 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/application/classes/controller/search.php(18): Controller_Search->search_query()
+#4 [internal function]: Controller_Search->action_index()
+#5 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request/client/internal.php(118): ReflectionMethod->invoke(Object(Controller_Search))
+#6 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request/client.php(64): Kohana_Request_Client_Internal->execute_request(Object(Request))
+#7 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request.php(1138): Kohana_Request_Client->execute(Object(Request))
+#8 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/index.php(109): Kohana_Request->execute()
+#9 {main}
+2012-01-12 15:08:48 --- ERROR: ErrorException [ 2 ]: Class HTTP_Header has no unserializer ~ MODPATH/cache/classes/kohana/cache/sqlite.php [ 110 ]
+2012-01-12 15:08:48 --- STRACE: ErrorException [ 2 ]: Class HTTP_Header has no unserializer ~ MODPATH/cache/classes/kohana/cache/sqlite.php [ 110 ]
+--
+#0 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/modules/cache/classes/kohana/cache/sqlite.php(110): Kohana_Core::error_handler('O:8:"Response":...')
+#1 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/application/classes/controller/search.php(115): Kohana_Cache_Sqlite->get('partille_0', false)
+#2 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/application/classes/controller/search.php(33): Controller_Search->cache(Object(Location), NULL)
+#3 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/application/classes/controller/search.php(18): Controller_Search->search_query()
+#4 [internal function]: Controller_Search->action_index()
+#5 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request/client/internal.php(118): ReflectionMethod->invoke(Object(Controller_Search))
+#6 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request/client.php(64): Kohana_Request_Client_Internal->execute_request(Object(Request))
+#7 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request.php(1138): Kohana_Request_Client->execute(Object(Request))
+#8 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/index.php(109): Kohana_Request->execute()
+#9 {main}
+2012-01-12 15:08:58 --- ERROR: ErrorException [ 2 ]: Class HTTP_Header has no unserializer ~ MODPATH/cache/classes/kohana/cache/sqlite.php [ 110 ]
+2012-01-12 15:08:58 --- STRACE: ErrorException [ 2 ]: Class HTTP_Header has no unserializer ~ MODPATH/cache/classes/kohana/cache/sqlite.php [ 110 ]
+--
+#0 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/modules/cache/classes/kohana/cache/sqlite.php(110): Kohana_Core::error_handler('O:8:"Response":...')
+#1 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/application/classes/controller/search.php(115): Kohana_Cache_Sqlite->get('partille_0', false)
+#2 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/application/classes/controller/search.php(33): Controller_Search->cache(Object(Location), NULL)
+#3 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/application/classes/controller/search.php(18): Controller_Search->search_query()
+#4 [internal function]: Controller_Search->action_index()
+#5 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request/client/internal.php(118): ReflectionMethod->invoke(Object(Controller_Search))
+#6 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request/client.php(64): Kohana_Request_Client_Internal->execute_request(Object(Request))
+#7 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request.php(1138): Kohana_Request_Client->execute(Object(Request))
+#8 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/index.php(109): Kohana_Request->execute()
+#9 {main}
+2012-01-12 15:10:33 --- ERROR: ErrorException [ 2 ]: Class HTTP_Header has no unserializer ~ MODPATH/cache/classes/kohana/cache/sqlite.php [ 110 ]
+2012-01-12 15:10:33 --- STRACE: ErrorException [ 2 ]: Class HTTP_Header has no unserializer ~ MODPATH/cache/classes/kohana/cache/sqlite.php [ 110 ]
+--
+#0 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/modules/cache/classes/kohana/cache/sqlite.php(110): Kohana_Core::error_handler('O:8:"Response":...')
+#1 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/application/classes/controller/search.php(115): Kohana_Cache_Sqlite->get('partille_0', false)
+#2 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/application/classes/controller/search.php(33): Controller_Search->cache(Object(Location), NULL)
+#3 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/application/classes/controller/search.php(18): Controller_Search->search_query()
+#4 [internal function]: Controller_Search->action_index()
+#5 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request/client/internal.php(118): ReflectionMethod->invoke(Object(Controller_Search))
+#6 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request/client.php(64): Kohana_Request_Client_Internal->execute_request(Object(Request))
+#7 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request.php(1138): Kohana_Request_Client->execute(Object(Request))
+#8 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/index.php(109): Kohana_Request->execute()
+#9 {main}
+2012-01-12 15:14:04 --- ERROR: ErrorException [ 2 ]: Class HTTP_Header has no unserializer ~ MODPATH/cache/classes/kohana/cache/sqlite.php [ 110 ]
+2012-01-12 15:14:04 --- STRACE: ErrorException [ 2 ]: Class HTTP_Header has no unserializer ~ MODPATH/cache/classes/kohana/cache/sqlite.php [ 110 ]
+--
+#0 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/modules/cache/classes/kohana/cache/sqlite.php(110): Kohana_Core::error_handler('O:8:"Response":...')
+#1 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/application/classes/controller/forecast.php(161): Kohana_Cache_Sqlite->get('United Kingdom/...', false)
+#2 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/application/classes/controller/forecast.php(27): Controller_Forecast->get_xml('United Kingdom', 'England', 'London')
+#3 [internal function]: Controller_Forecast->action_index()
+#4 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request/client/internal.php(118): ReflectionMethod->invoke(Object(Controller_Forecast))
+#5 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request/client.php(64): Kohana_Request_Client_Internal->execute_request(Object(Request))
+#6 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request.php(1138): Kohana_Request_Client->execute(Object(Request))
+#7 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/index.php(109): Kohana_Request->execute()
+#8 {main}
+2012-01-12 15:17:36 --- ERROR: ErrorException [ 2 ]: Class HTTP_Header has no unserializer ~ MODPATH/cache/classes/kohana/cache/sqlite.php [ 110 ]
+2012-01-12 15:17:36 --- STRACE: ErrorException [ 2 ]: Class HTTP_Header has no unserializer ~ MODPATH/cache/classes/kohana/cache/sqlite.php [ 110 ]
+--
+#0 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/modules/cache/classes/kohana/cache/sqlite.php(110): Kohana_Core::error_handler('O:8:"Response":...')
+#1 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/application/classes/controller/forecast.php(161): Kohana_Cache_Sqlite->get('United Kingdom/...', false)
+#2 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/application/classes/controller/forecast.php(27): Controller_Forecast->get_xml('United Kingdom', 'England', 'City of London')
+#3 [internal function]: Controller_Forecast->action_index()
+#4 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request/client/internal.php(118): ReflectionMethod->invoke(Object(Controller_Forecast))
+#5 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request/client.php(64): Kohana_Request_Client_Internal->execute_request(Object(Request))
+#6 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request.php(1138): Kohana_Request_Client->execute(Object(Request))
+#7 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/index.php(109): Kohana_Request->execute()
+#8 {main}
+2012-01-12 15:17:54 --- ERROR: ErrorException [ 2 ]: Class HTTP_Header has no unserializer ~ MODPATH/cache/classes/kohana/cache/sqlite.php [ 110 ]
+2012-01-12 15:17:54 --- STRACE: ErrorException [ 2 ]: Class HTTP_Header has no unserializer ~ MODPATH/cache/classes/kohana/cache/sqlite.php [ 110 ]
+--
+#0 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/modules/cache/classes/kohana/cache/sqlite.php(110): Kohana_Core::error_handler('O:8:"Response":...')
+#1 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/application/classes/controller/forecast.php(161): Kohana_Cache_Sqlite->get('South Africa/Mp...', false)
+#2 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/application/classes/controller/forecast.php(27): Controller_Forecast->get_xml('South Africa', 'Mpumalanga', 'London')
+#3 [internal function]: Controller_Forecast->action_index()
+#4 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request/client/internal.php(118): ReflectionMethod->invoke(Object(Controller_Forecast))
+#5 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request/client.php(64): Kohana_Request_Client_Internal->execute_request(Object(Request))
+#6 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request.php(1138): Kohana_Request_Client->execute(Object(Request))
+#7 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/index.php(109): Kohana_Request->execute()
+#8 {main}
+2012-01-12 15:17:59 --- ERROR: ErrorException [ 2 ]: Class HTTP_Header has no unserializer ~ MODPATH/cache/classes/kohana/cache/sqlite.php [ 110 ]
+2012-01-12 15:17:59 --- STRACE: ErrorException [ 2 ]: Class HTTP_Header has no unserializer ~ MODPATH/cache/classes/kohana/cache/sqlite.php [ 110 ]
+--
+#0 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/modules/cache/classes/kohana/cache/sqlite.php(110): Kohana_Core::error_handler('O:8:"Response":...')
+#1 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/application/classes/controller/forecast.php(161): Kohana_Cache_Sqlite->get('South Africa/Ea...', false)
+#2 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/application/classes/controller/forecast.php(27): Controller_Forecast->get_xml('South Africa', 'Eastern Cape', 'East London')
+#3 [internal function]: Controller_Forecast->action_index()
+#4 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request/client/internal.php(118): ReflectionMethod->invoke(Object(Controller_Forecast))
+#5 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request/client.php(64): Kohana_Request_Client_Internal->execute_request(Object(Request))
+#6 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request.php(1138): Kohana_Request_Client->execute(Object(Request))
+#7 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/index.php(109): Kohana_Request->execute()
+#8 {main}
+2012-01-12 15:18:03 --- ERROR: ErrorException [ 2 ]: Class HTTP_Header has no unserializer ~ MODPATH/cache/classes/kohana/cache/sqlite.php [ 110 ]
+2012-01-12 15:18:03 --- STRACE: ErrorException [ 2 ]: Class HTTP_Header has no unserializer ~ MODPATH/cache/classes/kohana/cache/sqlite.php [ 110 ]
+--
+#0 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/modules/cache/classes/kohana/cache/sqlite.php(110): Kohana_Core::error_handler('O:8:"Response":...')
+#1 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/application/classes/controller/forecast.php(161): Kohana_Cache_Sqlite->get('Canada/Ontario/...', false)
+#2 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/application/classes/controller/forecast.php(27): Controller_Forecast->get_xml('Canada', 'Ontario', 'London')
+#3 [internal function]: Controller_Forecast->action_index()
+#4 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request/client/internal.php(118): ReflectionMethod->invoke(Object(Controller_Forecast))
+#5 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request/client.php(64): Kohana_Request_Client_Internal->execute_request(Object(Request))
+#6 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request.php(1138): Kohana_Request_Client->execute(Object(Request))
+#7 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/index.php(109): Kohana_Request->execute()
+#8 {main}
+2012-01-12 15:18:05 --- ERROR: ErrorException [ 2 ]: Class HTTP_Header has no unserializer ~ MODPATH/cache/classes/kohana/cache/sqlite.php [ 110 ]
+2012-01-12 15:18:05 --- STRACE: ErrorException [ 2 ]: Class HTTP_Header has no unserializer ~ MODPATH/cache/classes/kohana/cache/sqlite.php [ 110 ]
+--
+#0 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/modules/cache/classes/kohana/cache/sqlite.php(110): Kohana_Core::error_handler('O:8:"Response":...')
+#1 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/application/classes/controller/forecast.php(161): Kohana_Cache_Sqlite->get('United Kingdom/...', false)
+#2 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/application/classes/controller/forecast.php(27): Controller_Forecast->get_xml('United Kingdom', 'England', 'London')
+#3 [internal function]: Controller_Forecast->action_index()
+#4 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request/client/internal.php(118): ReflectionMethod->invoke(Object(Controller_Forecast))
+#5 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request/client.php(64): Kohana_Request_Client_Internal->execute_request(Object(Request))
+#6 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request.php(1138): Kohana_Request_Client->execute(Object(Request))
+#7 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/index.php(109): Kohana_Request->execute()
+#8 {main}
+2012-01-12 15:18:47 --- ERROR: ErrorException [ 2 ]: Class HTTP_Header has no unserializer ~ MODPATH/cache/classes/kohana/cache/sqlite.php [ 110 ]
+2012-01-12 15:18:47 --- STRACE: ErrorException [ 2 ]: Class HTTP_Header has no unserializer ~ MODPATH/cache/classes/kohana/cache/sqlite.php [ 110 ]
+--
+#0 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/modules/cache/classes/kohana/cache/sqlite.php(110): Kohana_Core::error_handler('O:8:"Response":...')
+#1 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/application/classes/controller/forecast.php(161): Kohana_Cache_Sqlite->get('United Kingdom/...', false)
+#2 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/application/classes/controller/forecast.php(27): Controller_Forecast->get_xml('United Kingdom', 'England', 'London')
+#3 [internal function]: Controller_Forecast->action_index()
+#4 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request/client/internal.php(118): ReflectionMethod->invoke(Object(Controller_Forecast))
+#5 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request/client.php(64): Kohana_Request_Client_Internal->execute_request(Object(Request))
+#6 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/system/classes/kohana/request.php(1138): Kohana_Request_Client->execute(Object(Request))
+#7 /storage/content/11/110711/wp.theresetherese.se/public_html/weather/index.php(109): Kohana_Request->execute()
+#8 {main}

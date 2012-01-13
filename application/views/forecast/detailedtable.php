@@ -1,11 +1,11 @@
-<h1 id="forecastTitle"><?php echo Text::ucfirst($city) . ', ' . Text::ucfirst($region) . ', ' . Text::ucfirst($country); ?></h1>
+<h2 id="forecastTitle"><?php echo Text::ucfirst($city) . ', ' . Text::ucfirst($region) . ', ' . Text::ucfirst($country); ?></h2>
 <?php 
 	$date = date('l', $forecasts->getFromTime());
 	$fromTime = date('H:i', $forecasts->getFromTime());
 	$toTime = date('H:i', $forecasts->getToTime());
 ?>
 
-<h2><?php echo "$date, $fromTime - $toTime"; ?></h2>
+<h3><?php echo "$date, $fromTime - $toTime"; ?></h3>
 <table>
 	
 	<?php 
@@ -41,23 +41,10 @@
 			
 			
 			echo "
-				<tr>
-					<td>Weather</td>
-					<td><img src='" . URL::base('http') . "media/icons/$symbol.png' alt='$symbolName' /></td>
-					<td>$temperature &deg; C</td>
-				</tr>
-				<tr>
-					<td>Precipitation</td>
-					<td>$precipitation</td>
-				</tr>
-				<tr>
-					<td>Pressure</td>
-					<td>$pressure</td>
-				</tr>
-				<tr>
-					<td>Wind</td>
-					<td>$windSpeed mps, $windDirectionDeg &deg; $windDirection</td>
-				</tr>
+				<p><img src='" . URL::base('http') . "media/icons/$symbol.png' alt='$symbolName' /> $temperature &deg; C</p>
+				<p>Precipitation: $precipitation</p>
+				<p>Pressure: $pressure</p>
+				<p>Wind: $windSpeed mps, $windDirectionDeg &deg; $windDirection</p>
 			";
 	?>
 </table>

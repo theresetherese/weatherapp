@@ -132,7 +132,7 @@ var removeFavorite = function(favorite){
 			var favorites = localStorage.getItem('weatherFavorites').split(',');
 			//Get index of specified favorite
 			var index = jQuery.inArray(favorite, favorites);
-			
+			alert(index);
 			//Check if the favorite exists in the array
 			if(index >= 0)
 			{

@@ -1,5 +1,5 @@
 var validCountryRegionCity = function(s){
-	if(s.match(/^[a-zåäö0-9\s]+\/[a-zåäö0-9\s]+\/[a-zåäö0-9\s]+(\/[0-9]{8}\/[01234])?$/i)){
+	if(s.match(/^[a-zåäö0-9\s]*\/[a-zåäö0-9\s]*\/[a-zåäö0-9\s]*(\/[0-9]{8}\/[01234])?$/i)){
 		return true;
 	}
 	else{
@@ -8,7 +8,7 @@ var validCountryRegionCity = function(s){
 };
 
 var validText = function(s){
-	if(s.match(/^[a-zåäö0-9\s]+$/)){
+	if(s.match(/^[a-zåäö0-9\s\/]+$/)){
 		return true;
 	}
 	else{

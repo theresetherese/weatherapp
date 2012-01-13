@@ -4,7 +4,7 @@
  */
 var loadForecast = function(_url){
 	if(validCountryRegionCity(_url)){
-		var url2 = 'http://localhost:8888/weather/forecast/' + _url;
+		var url2 = '/weather/forecast/' + _url;
 		
 		$.ajaxSetup({
 			url : url2,
@@ -15,10 +15,16 @@ var loadForecast = function(_url){
 				handleForecastData(data);
 			},
 			error : function(object, error) {
-				console.log(object, error);	
+				errorForecastMessage('A problem occurred when trying to load a forecast. Please try again.');
 			}
 		})
 	}
+};
+
+var errorForecastMessage = function(message){
+	$('#forecast').empty();
+	
+	$('#forecast').append(message);
 };
 
 /*

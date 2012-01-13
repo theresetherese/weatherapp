@@ -15,10 +15,11 @@
 	
 	if ($pageNr >= 1)
 	{
-		echo '<a href="#" id="' . $query . '/' . ($pageNr - 1) . '" class="paginationLink">&laquo; Previous results</a> ';
+		echo '<a href="#" id="' . $query . '/' . ($pageNr - 1) . '" class="paginationLinkPrev">&laquo; Previous</a> ';
 	}
+	
 	if(count($locations) === 10)
 	{
-		echo '<a href="#" id="' . $query . '/' . ($pageNr + 1) . '" class="paginationLink">Next results &raquo;</a>';
+		echo '<a href="#" id="' . $query . '/' . ($pageNr + 1) . '" class="paginationLinkNext">Next &raquo;</a>';
 	}
 ?>

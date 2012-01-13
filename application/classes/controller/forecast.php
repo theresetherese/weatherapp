@@ -146,19 +146,19 @@ class Controller_Forecast extends Controller {
 	public function get_xml($country, $region, $city)
 	{
 		// Check for the existance of the cache driver
-		if(isset(Cache::$instances['sqlite']))
+		if(isset(Cache::$instances['file']))
 		{
 		     // Get the existing cache instance
-		     $memcache = Cache::$instances['sqlite'];
+		     $memcache = Cache::$instances['file'];
 		}
 		else
 		{
 		     // Get the cache driver instance
-		     $memcache = Cache::instance('sqlite');
+		     $memcache = Cache::instance('file');
 		}
 		
 		//Check for cached xml
-		if ($xml = Cache::instance('sqlite')->get("$country/$region/$city", FALSE))
+		if ($xml = Cache::instance('file')->get("$country/$region/$city", FALSE))
 		{			
 		    return $xml;
 		}
@@ -172,7 +172,7 @@ class Controller_Forecast extends Controller {
 			 $now = time();
 			 $seconds = $tomorrowMidnight - $now;
 			 
-			 Cache::instance('sqlite')->set("$country/$region/$city", $xml, $seconds);
+			 Cache::instance('file')->set("$country/$region/$city", $xml, $seconds);
 			 return $xml;
 		}
 	}

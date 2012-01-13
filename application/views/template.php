@@ -3,12 +3,13 @@
 	<head>
 		<meta charset="utf-8">
 		<title>WeatherApp</title>
+		<meta name = "viewport" content = "width = device-width", "initial-scale = 1.0">
 		<?php foreach ($styles as $file => $type) echo HTML::style($file, array('media' => $type)), PHP_EOL ?>
 		<?php foreach ($scripts as $file) echo HTML::script($file), PHP_EOL ?>
 	</head>
 	<body>
 		<div class="wrapper">
-			<h1>Weather</h1>
+			<h1>WeatherApp</h1>
 			<div id="searchForm">
 				<h2>Search for a city</h2>
 				<?php

@@ -1,13 +1,6 @@
-<h1 id="forecastTitle"><?php echo Text::ucfirst($city) . ', ' . Text::ucfirst($region) . ', ' . Text::ucfirst($country); ?></h1>
+<h2 id="forecastTitle"><?php echo Text::ucfirst($city) . ', ' . Text::ucfirst($region) . ', ' . Text::ucfirst($country); ?></h2>
 <p class="addFavorite"><a href="#" class="addFavoriteLink" id="<?php echo "$country/$region/$city"; ?>">Add favorite</a></p>
-<table>
-	<thead>
-		<th>Date</th>
-		<th>Time</th>
-		<th>Weather</th>
-		<th>Temperature</th>
-		<th>Details</th>
-	</thead>
+<dl>
 	<?php 
 		foreach ($forecasts as $f)
 		{
@@ -41,14 +34,9 @@
 			$symbolName = $f->getSymbolName();
 			$temperature = $f->getTemperature();
 			echo "
-				<tr>
-					<td>$date</td>
-					<td>$fromTime - $toTime</td>
-					<td><img src='" . URL::base('http') . "media/icons/$symbol.png' alt='$symbolName' /></td>
-					<td>$temperature &deg; C</td>
-					<td><a href='#' id='$country/$region/$city/$fulldate/$period' class='detailsLink'>Details</a></td>
-				</tr>
+				<dt>$date $fromTime - $toTime</dt>
+				<dd><p><img src='" . URL::base('http') . "media/icons/$symbol.png' alt='$symbolName' /> <span class='temperature'>$temperature &deg; C</span><a href='#' id='$country/$region/$city/$fulldate/$period' class='detailsLink'>Details</a></p></dd>
 			";
 		}
 	?>
-</table>
+</dl>

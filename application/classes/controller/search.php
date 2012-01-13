@@ -35,7 +35,7 @@ class Controller_Search extends Controller {
 		$searchhandler = Model::factory('searchhandler');
 		if($locations = $searchhandler->create_location_object_from_query($xml))
 		{
-			if(is_null($json))
+			if(is_null($json) OR empty($json))
 			{	
 				$view = View::factory('search/results');
 				$view->locations = $locations;
@@ -68,7 +68,7 @@ class Controller_Search extends Controller {
 		
 		if($location = $searchhandler->create_location_object_from_coords($xml))
 		{
-			if(is_null($json))
+			if(is_null($json) OR empty($json))
 			{	
 				$city = $location->getCity();
 				$region = $location->getRegion();
@@ -91,15 +91,15 @@ class Controller_Search extends Controller {
 	public function cache(Location $location, $page = NULL)
 	{
 		// Check for the existance of the cache driver
-		if(isset(Cache::$instances['sqlite']))
+		if(isset(Cache::$instances['file']))
 		{
 		     // Get the existing cache instance
-		     $memcache = Cache::$instances['sqlite'];
+		     $memcache = Cache::$instances['file'];
 		}
 		else
 		{
 		     // Get the cache driver instance
-		     $memcache = Cache::instance('sqlite');
+		     $memcache = Cache::instance('file');
 		}
 		
 		$lat = $location->getLat();
@@ -112,11 +112,11 @@ class Controller_Search extends Controller {
 		}
 
 		//Check for cached xml
-		if ($xml = Cache::instance('sqlite')->get($city . "_" . $page, FALSE))
+		if ($xml = Cache::instance('file')->get($city . "_" . $page, FALSE))
 		{			
 		    return $xml;
 		}
-		else if($xml = Cache::instance('sqlite')->get("$lat,$long", FALSE))
+		else if($xml = Cache::instance('file')->get("$lat,$long", FALSE))
 		{
 			return $xml;
 		}
@@ -130,11 +130,11 @@ class Controller_Search extends Controller {
 			
 			if(!is_null($city))
 			{
-				Cache::instance('sqlite')->set($city . "_" . $page, $xml, $week);
+				Cache::instance('file')->set($city . "_" . $page, $xml, $week);
 			}
 			else if(!is_null($lat) AND !is_null($long))
 			{
-				Cache::instance('sqlite')->set("$lat,$long", $xml, $week);
+				Cache::instance('file')->set("$lat,$long", $xml, $week);
 			}
 			
 			return $xml;

@@ -34,9 +34,9 @@ class Controller_Index extends Controller_Template {
 			
 			$scripts = array(
 				'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js',
+				'media/js/search.js',
 				'media/js/validator.js',
 				'media/js/forecast.js',
-				'media/js/search.js',
 				'media/js/favorites.js'
 			);
 		

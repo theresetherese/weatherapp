@@ -47,12 +47,35 @@ table {
 	border-spacing: 0;
 }
 
+/*
+ * TEXT
+ */
+
+h1{
+	font-size:3em;
+}
 
 /*
  * GENERAL
  */
 
+body{
+	background:url('bg.png');
+}
+
 .wrapper{
 	width:320px;
 	margin:0 auto;
+	padding:2em 0;
+}
+
+table{
+	width:100%;
+	margin-bottom:5em;
+	border:1px solid black;
+	vertical-align:text-top;
+}
+tr, td{
+	border:1px solid black;
+	vertical-align:top;
 }
