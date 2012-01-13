@@ -5,7 +5,6 @@
 var loadForecast = function(_url){
 	if(validCountryRegionCity(_url)){
 		var url2 = '/weather/forecast/' + _url;
-		
 		$.ajaxSetup({
 			url : url2,
 			type : "GET",
@@ -18,6 +17,9 @@ var loadForecast = function(_url){
 				errorForecastMessage('A problem occurred when trying to load a forecast. Please try again.');
 			}
 		})
+	}
+	else{
+		errorForecastMessage('A problem occurred when trying to load a forecast. Please try again.');
 	}
 };
 

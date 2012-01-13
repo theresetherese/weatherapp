@@ -11,7 +11,7 @@
 		<div class="wrapper">
 			<h1>WeatherApp</h1>
 			<div id="searchForm">
-				<h2>Search for a city</h2>
+				<h2>Search for a location</h2>
 				<?php
 					echo Form::open('');
 					echo Form::input('searchInput', '', array('id' => 'searchInput'));
@@ -19,7 +19,6 @@
 	  				echo Form::close();
 				?>
 			</div>
-			<div id="searchResult"></div>
 			<div id="forecast">
 				<?php echo $content ?>
 			</div>

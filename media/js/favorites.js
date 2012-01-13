@@ -97,7 +97,7 @@ var getFavorites = function(){
 					location.reverse();
 					
 					//Add list items as "city, region, country"
-					$('#favoritesList').append('<li><a href="#" class="favoriteLink" id="' + favorites[i] + '">' + location[0] + ', ' + location[1] + ', ' + location[2] + '</a> - <a href="#" class="removeFavoriteLink" id="' + favorites[i] + '">Remove</a></li>');
+					$('#favoritesList').append('<li><a href="#" class="favoriteLink" id="' + favorites[i] + '">' + location[0] + ', ' + location[1] + ', ' + location[2] + '</a> <a href="#" class="removeFavoriteLink" id="' + favorites[i] + '">Remove</a></li>');
 				}
 				//Close list
 				$('#favorites').append('</ul>');
@@ -132,15 +132,21 @@ var removeFavorite = function(favorite){
 			var favorites = localStorage.getItem('weatherFavorites').split(',');
 			//Get index of specified favorite
 			var index = jQuery.inArray(favorite, favorites);
-			alert(index);
+			
 			//Check if the favorite exists in the array
-			if(index >= 0)
+			if(index > 0)
 			{
 				//Remove favorite
 				favorites.splice(index,1);
 				
 				//Save modified array to localStorage
 				localStorage.setItem('weatherFavorites', favorites);
+			}
+			
+			else if(index === 0)
+			{
+				localStorage.removeItem('weatherFavorites');
+				$('#favorites').empty();
 			}
 			//Reload list
 			getFavorites();

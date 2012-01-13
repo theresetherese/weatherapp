@@ -105,30 +105,44 @@ var errorSearchMessage = function(message){
  * Load next/previous page on pagination-click
  */
 var handleSearchData = function(data){
-	$('#searchResult').empty();
+	$('#searchResult').remove();
+	$('#searchForm').after('<div id="searchResult"></div>');
 	$('#clearSearchResult').remove();
 	
 	$('#searchResult').append(data);
 	
 	$('#searchForm').after('<a href="#" id="clearSearchResult">Clear search results</a>');
 	
-	$('#clearSearchResult').click(function(){
-		$('#searchResult').empty();
-		$(this).remove();
-	});
-	
 	$('.chooseLocationLink').click(function(e) {
 		e.preventDefault();
 		loadForecast($(this).attr('id'));
+		var new_position = $('#forecast').offset();
+		window.scrollTo(new_position.left,new_position.top);
+	});
+	
+	if($("#searchResult li").length === 1)
+	{
+		$(".chooseLocationLink").click();
+		$('#searchResult').remove();
+		$('#clearSearchResult').remove();
+	}
+	
+	$('#clearSearchResult').click(function(){
+		$('#searchResult').remove();
+		$(this).remove();
 	});
 	
 	getSearches();
 	
-	$('.paginationLink').click(function(e) {
+	$('.paginationLinkPrev').click(function(e) {
 		e.preventDefault();
 		loadSearchResults($(this).attr('id'));
 	});
 	
+	$('.paginationLinkNext').click(function(e) {
+		e.preventDefault();
+		loadSearchResults($(this).attr('id'));
+	});
 	
 };
 

@@ -18,10 +18,10 @@ class Model_Searchmodel extends Model
 			if($page != 0)
 			{
 				$startFrom = $maxRows * $page;
-				$url = "http://api.geonames.org/search?name=$city&maxRows=$maxRows&style=full&username=ts222ay&featureClass=P&startRow=$startFrom";
+				$url = "http://api.geonames.org/search?q=$city&maxRows=$maxRows&style=full&username=ts222ay&featureClass=P&startRow=$startFrom";
 			}	
 			else{
-				$url = "http://api.geonames.org/search?name=$city&maxRows=$maxRows&style=full&username=ts222ay&featureClass=P";
+				$url = "http://api.geonames.org/search?q=$city&maxRows=$maxRows&style=full&username=ts222ay&featureClass=P";
 			}
 			
 			
