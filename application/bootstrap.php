@@ -82,6 +82,7 @@ if (isset($_SERVER['KOHANA_ENV']))
 Kohana::init(array(
 	'base_url'   => '/weather',
 	'index_file' => '',
+	'errors' => false,
 ));
 
 /**
@@ -105,7 +106,7 @@ Kohana::modules(array(
 	// 'image'      => MODPATH.'image',      // Image manipulation
 	// 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
-	 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
+	'userguide'  => MODPATH.'userguide',  // User guide and API documentation
 	));
 
 /**
@@ -130,9 +131,6 @@ Route::set('searchPage', 'search(/<city>)(/<page>)(/<json>)')
 		'controller' => 'search',
 		'action'     => 'index',
 	));
-
-
-
 
 Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults(array(
